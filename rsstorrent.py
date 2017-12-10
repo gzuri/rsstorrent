@@ -62,7 +62,10 @@ for feed_url in FEEDS:
     # Valid feed ?
     if feed["bozo"] != 1:
         for item in feed["items"]:
-            items.append((item["date_parsed"], item))
+            if "date_parsed" in item:
+                items.append((item["date_parsed"], item))
+            else:
+                items.append((item["published_parsed"], item))
     else:
         if VERBOSE:    
             print "bad feed: " + feed_url
